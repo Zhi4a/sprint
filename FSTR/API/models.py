@@ -2,8 +2,8 @@ from django.db import models
 
 
 class User(models.Model):
+    fam = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    second_name = models.CharField(max_length=50)
     otc = models.CharField(max_length=50)
     phone = models.CharField(max_length=25)
     email = models.EmailField(unique=True)
