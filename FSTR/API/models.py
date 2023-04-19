@@ -1,12 +1,15 @@
 from django.db import models
 
 
-class User(models.Model):
+class MyUser(models.Model):
     fam = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     otc = models.CharField(max_length=50)
     phone = models.CharField(max_length=25)
     email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return f'{self.name}, {self.email}'
 
 
 class Pass(models.Model):
@@ -22,10 +25,10 @@ class Pass(models.Model):
     title = models.CharField(max_length=255)
     other_titles = models.CharField(max_length=255)
     connect = models.CharField(max_length=255, blank=True)
-    add_time = models.DateTimeField()
+    add_time = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=8, choices=ADDED_STATUS, default='new')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     coordinates = models.ForeignKey('Coordinates', on_delete=models.CASCADE)
     levels = models.ForeignKey('Level', blank=True, on_delete=models.PROTECT)
 
